@@ -8,14 +8,13 @@ knitr::opts_chunk$set(
 library(SimplifyStats)
 
 # Generate data.
-set.seed(8)
 df <- iris
 
 # Modify df to demonstrate additional functionality.
 ## Add an NA.
 df$Sepal.Length[1] <- NA
 ## Add another grouping variable.
-df$Condition <- sample(c("untreated","treated"), nrow(df), replace = TRUE)
+df$Condition <- rep(c("untreated","treated"), 75)
 
 # Generate descriptive statistics.
 group_summarize(
@@ -30,7 +29,7 @@ group_summarize(
 pairwise_stats(
   df, 
   group_cols = c("Species","Condition"), 
-  var_col = "Sepal.Length", 
+  var_cols = c("Sepal.Length", "Sepal.Width"),
   t.test
 )
 
